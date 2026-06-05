@@ -1,0 +1,51 @@
+---
+title: "Staggered List Reveal"
+description: "A CSS-only staggered fade-in animation for list items using animation-delay."
+category: "UI Experiments"
+date: "2026-05-10"
+---
+
+## Overview
+
+Lists that appear all at once feel abrupt. This experiment adds a subtle staggered reveal using only CSS — no JavaScript, no animation libraries.
+
+## The CSS
+
+```css
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-list > * {
+  animation: fade-up 0.4s ease-out both;
+}
+
+.stagger-list > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-list > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-list > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-list > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-list > *:nth-child(5) { animation-delay: 240ms; }
+```
+
+## Variations Tested
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| CSS nth-child | Zero JS, performant | Limited to ~10 items |
+| Intersection Observer | Works on scroll | Adds complexity |
+| Framer Motion | Flexible | Overkill for this |
+
+## Verdict
+
+CSS approach wins for static lists under 8 items. For dynamic or scroll-triggered lists, Intersection Observer is worth the trade-off.
+
+## Accessibility
+
+Respects `prefers-reduced-motion` — animation is disabled when the user has motion sensitivity enabled.

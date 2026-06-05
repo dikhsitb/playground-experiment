@@ -1,0 +1,49 @@
+---
+title: "Hover Card with Delay"
+description: "A shadcn/ui-inspired hover card that opens after a configurable delay to prevent accidental triggers."
+category: "Components"
+date: "2026-04-20"
+---
+
+## Overview
+
+Hover cards that appear instantly are annoying — you trigger them while moving the cursor across the page. This version adds a 300ms open delay and immediate close on mouse leave.
+
+## Key Behavior
+
+- **Open delay**: 300ms (configurable)
+- **Close delay**: 0ms (immediate)
+- **Position**: Auto-flip to stay in viewport
+- **Keyboard**: Focusable, opens on focus, closes on blur
+
+## Implementation Sketch
+
+```tsx
+const OPEN_DELAY = 300;
+
+function useHoverDelay() {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const onMouseEnter = () => {
+    timeoutRef.current = setTimeout(() => setIsOpen(true), OPEN_DELAY);
+  };
+
+  const onMouseLeave = () => {
+    clearTimeout(timeoutRef.current);
+    setIsOpen(false);
+  };
+
+  return { isOpen, onMouseEnter, onMouseLeave };
+}
+```
+
+## Design Notes
+
+- Card uses a subtle border instead of shadow — matches the minimal aesthetic
+- Content area max-width of 320px to keep previews scannable
+- Arrow pointer removed for cleaner look
+
+## Inspired By
+
+GitHub's hover cards for PR references. They nail the delay timing — studied their behavior and replicated the feel.

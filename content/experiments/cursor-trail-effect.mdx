@@ -1,0 +1,39 @@
+---
+title: "Subtle Cursor Trail"
+description: "A minimal cursor trail effect using requestAnimationFrame — more tasteful than the usual particle explosion."
+category: "UI Experiments"
+date: "2026-04-12"
+---
+
+## Overview
+
+Most cursor trail effects are visually loud. This one leaves a faint dot that fades over 600ms. Barely noticeable until you pay attention.
+
+## How It Works
+
+1. Track mouse position on `mousemove`
+2. Push coordinates to a ring buffer (max 8 points)
+3. On each `requestAnimationFrame`, draw points with decreasing opacity
+4. Oldest points fade out and get removed
+
+## Code
+
+```tsx
+const TRAIL_LENGTH = 8;
+const FADE_MS = 600;
+
+// Each point: { x, y, timestamp }
+// Opacity = 1 - (now - timestamp) / FADE_MS
+// Remove points where opacity <= 0
+```
+
+## Performance
+
+- Uses a `<canvas>` overlay, not DOM elements
+- Ring buffer prevents unbounded memory growth
+- Disabled on touch devices (no cursor)
+- Respects `prefers-reduced-motion`
+
+## Verdict
+
+Fun for a playground site. Would never ship this on a product. But it sets the tone — this is a lab, not a company homepage.

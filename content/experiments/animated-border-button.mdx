@@ -1,0 +1,68 @@
+---
+title: "Animated Border Button"
+description: "A React button component with a subtle animated border that follows the cursor on hover."
+category: "Components"
+date: "2026-05-20"
+featured: true
+thumbnail: "button-preview"
+---
+
+## Overview
+
+A minimal button with an animated border gradient that tracks cursor position. Built with React, CSS custom properties, and no animation libraries.
+
+## Implementation
+
+```tsx
+"use client";
+
+import { useRef, useState } from "react";
+
+export function AnimatedBorderButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    setPosition({
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    });
+  }
+
+  return (
+    <button
+      ref={ref}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      className="relative px-6 py-3 text-sm font-medium"
+      style={{
+        background: `radial-gradient(
+          circle at ${position.x}% ${position.y}%,
+          rgba(0, 102, 255, 0.15) 0%,
+          transparent 50%
+        )`,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+## Design Decisions
+
+- Used radial gradient instead of conic for a softer, less distracting effect
+- No transition on position — instant tracking feels more responsive
+- Kept the button otherwise plain to let the interaction be the feature
+
+## Usage
+
+Drop into any form or CTA. Works well on dark and light backgrounds. The electric blue accent matches the site palette.

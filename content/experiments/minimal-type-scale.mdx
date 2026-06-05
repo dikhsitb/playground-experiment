@@ -1,0 +1,37 @@
+---
+title: "Minimal Type Scale"
+description: "A 5-step typographic scale designed for sparse, editorial layouts with maximum breathing room."
+category: "Design Concepts"
+date: "2026-05-02"
+---
+
+## Concept
+
+Most design systems use 8–12 type sizes. This scale uses exactly five, each with a clear purpose. Fewer sizes means fewer decisions and more consistency.
+
+## The Scale
+
+| Token | Size | Use |
+|-------|------|-----|
+| `display` | 48–72px | Page titles, hero headlines |
+| `heading` | 24–32px | Section headers |
+| `body` | 16–18px | Primary reading text |
+| `caption` | 13–14px | Metadata, labels, dates |
+| `mono` | 13px | Code, technical labels |
+
+## Spacing Pairing
+
+Each type size has a paired line-height and margin:
+
+- Display: 1.1 line-height, 48px bottom margin
+- Heading: 1.2 line-height, 24px bottom margin
+- Body: 1.6 line-height, 16px bottom margin
+- Caption: 1.4 line-height, 8px bottom margin
+
+## Why Five?
+
+Six felt like one too many. Four felt constraining for technical content that needs a mono size. Five hits the sweet spot where every size has a job and nothing overlaps.
+
+## Application
+
+This playground site uses this scale. The hero is `display`, section titles are `heading`, card descriptions are `body`, and dates/categories are `caption`.

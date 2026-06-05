@@ -1,0 +1,43 @@
+---
+title: "Chain-of-Thought Prompting for Code Review"
+description: "A structured prompt template that guides LLMs through systematic code review with reasoning steps."
+category: "AI Prompts"
+date: "2026-05-28"
+featured: true
+thumbnail: "prompt-template"
+---
+
+## Overview
+
+This prompt template structures code review as a step-by-step reasoning process. Instead of asking "review this code," it walks the model through understanding, analyzing, and suggesting improvements in a predictable sequence.
+
+## The Prompt
+
+```
+You are a senior engineer reviewing code. Follow these steps:
+
+1. UNDERSTAND: Summarize what this code does in 2-3 sentences.
+2. IDENTIFY: List the main patterns, dependencies, and assumptions.
+3. ANALYZE: Check for bugs, edge cases, performance issues, and readability.
+4. SUGGEST: Provide specific, actionable improvements with code examples.
+5. PRIORITIZE: Rank suggestions by impact (critical → nice-to-have).
+
+For each suggestion, explain WHY it matters, not just WHAT to change.
+
+Code to review:
+[CODE]
+```
+
+## Why It Works
+
+Breaking review into explicit steps prevents the model from jumping to surface-level suggestions. The "WHY" requirement forces deeper reasoning rather than generic advice like "add error handling."
+
+## Notes
+
+- Works best with models that support longer context (Claude, GPT-4)
+- Adjust step 4 to include "security" for backend code
+- Pair with a second pass asking "what did you miss?" for better coverage
+
+## Results
+
+Tested on 12 PRs. Caught 3 real bugs that a simple "review this" prompt missed. False positive rate was higher but acceptable for a first pass.
