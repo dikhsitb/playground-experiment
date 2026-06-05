@@ -61,4 +61,17 @@ The site is a single scrollable page. Experiment cards link to anchored detail s
 
 ## Deploy
 
-Deploy to [Vercel](https://vercel.com) — zero config required.
+### Cloudflare Pages
+
+This site is a static export. Use these build settings in the Cloudflare dashboard:
+
+| Setting | Value |
+|---------|-------|
+| Framework preset | Next.js (Static HTML Export) |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Node.js version | 20 |
+
+### Vercel
+
+Deploy to [Vercel](https://vercel.com) — also works with zero extra config.
