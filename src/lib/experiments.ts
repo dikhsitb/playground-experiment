@@ -8,6 +8,7 @@ export type ExperimentCategory =
   | "AI Prompts"
   | "Components"
   | "Workflows"
+  | "Figma Components"
   | "UI Experiments"
   | "Design Concepts";
 
